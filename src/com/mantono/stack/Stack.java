@@ -9,7 +9,7 @@ import java.util.EmptyStackException;
  * 
  * @author Anton Österberg
  * 
- * @param <T>
+ * @param <T> the type of the elements that are handled by the stack.
  */
 public interface Stack<T> extends Serializable
 {
