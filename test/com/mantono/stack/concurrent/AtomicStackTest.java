@@ -64,11 +64,51 @@ public class AtomicStackTest
 		assertFalse(stack.empty());
 		assertEquals(new Integer(1), stack.peek());
 	}
+	
+	@Test
+	public void testPushToTheLimit()
+	{
+		final Stack<Integer> stack = new AtomicStack<Integer>();
+		for(int i = 0; i < 20; i++)
+			stack.push(i);
+		for(int i = 19; i >= 0; i--)
+			assertEquals(new Integer(i), stack.pop());
+	}
 
 	@Test
-	public void testHashCode()
+	public void testHashCodeForEqualStacks()
 	{
-		fail("Not yet implemented");
+		final AtomicStack<Integer> stack1 = new AtomicStack<Integer>();
+		final AtomicStack<Integer> stack2 = new AtomicStack<Integer>();
+		
+		stack1.push(1);
+		stack2.push(1);
+		
+		stack1.push(2);
+		stack2.push(2);
+		
+		stack1.push(3);
+		stack2.push(3);
+		
+		assertEquals(stack1.hashCode(), stack2.hashCode());
+	}
+	
+	@Test
+	public void testHashCodeForDifferentStacks()
+	{
+		final AtomicStack<Integer> stack1 = new AtomicStack<Integer>();
+		final AtomicStack<Integer> stack2 = new AtomicStack<Integer>();
+		
+		stack1.push(1);
+		stack2.push(1);
+		
+		stack1.push(2);
+		stack2.push(3);
+		
+		stack1.push(3);
+		stack2.push(2);
+		
+		assertFalse(stack1.hashCode() == stack2.hashCode());
 	}
 
 	@Test
@@ -102,12 +142,6 @@ public class AtomicStackTest
 		stack2.push(7);
 		
 		assertFalse(stack1.equals(stack2));
-	}
-
-	@Test
-	public void testClone()
-	{
-		fail("Not yet implemented");
 	}
 
 	@Test
