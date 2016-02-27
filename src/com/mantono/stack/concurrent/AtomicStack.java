@@ -82,7 +82,7 @@ public class AtomicStack<T> implements Stack<T>
 	{
 		final int newSize = stackVector.length*2;
 		final T[] newArray = (T[]) new Object[newSize];
-		for(int i = 0; i < head; i++)
+		for(int i = 0; i <= head; i++)
 			newArray[i] = stackVector[i];
 		stackVector = newArray;
 	}
@@ -108,18 +108,32 @@ public class AtomicStack<T> implements Stack<T>
 	@Override
 	public int hashCode()
 	{
-		//TODO Implement me!
-		return -1;
+		int hashCode = 1;
+		for(int i = 0; i <= head; i++)
+		{
+			final T element = stackVector[i];
+			if(element != null)
+			{
+				hashCode *= 17;
+				hashCode += element.hashCode();
+			}
+		}
+		return hashCode;
 	}
+
 	
 	@Override
 	public String toString()
 	{
 		final StringBuilder output = new StringBuilder();
 		output.append("[");
-		for(T element : stackVector)
-			output.append(element.toString() + ", "); //NullPointerException - How? Why?
-		output.delete(output.length()-2, output.length()-1);
+		for(int i = head; i >= 0; i--)
+		{
+			final T element = stackVector[i];
+			if(element != null)
+				output.append(element.toString() + ", ");
+		}
+		output.delete(output.length()-2, output.length());
 		output.append("]");
 		return output.toString();
 	}
