@@ -80,11 +80,7 @@ public class AtomicStack<T> implements Stack<T>
 
 	private void expand()
 	{
-		final int newSize = stackVector.length*2;
-		final T[] newArray = (T[]) new Object[newSize];
-		for(int i = 0; i <= head; i++)
-			newArray[i] = stackVector[i];
-		stackVector = newArray;
+		stackVector = Arrays.copyOf(stackVector, stackVector.length*2);
 	}
 
 	private boolean hasReachedCapacity()
