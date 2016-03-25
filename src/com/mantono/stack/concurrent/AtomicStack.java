@@ -27,7 +27,7 @@ public class AtomicStack<T> implements Stack<T>
 	}
 
 	@Override
-	public T peek() throws EmptyStackException
+	public T peek()
 	{
 		if(empty())
 			throw new EmptyStackException();
@@ -35,7 +35,7 @@ public class AtomicStack<T> implements Stack<T>
 	}
 
 	@Override
-	public T pop() throws EmptyStackException
+	public T pop()
 	{
 		try
 		{

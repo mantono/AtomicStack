@@ -27,7 +27,7 @@ public interface Stack<T> extends Serializable
 	 * @throws EmptyStackException
 	 *             if the stack does not contains any elements.
 	 */
-	T peek() throws EmptyStackException;
+	T peek();
 
 	/**
 	 * Returns and removes the element at the top of the stack.
@@ -36,7 +36,7 @@ public interface Stack<T> extends Serializable
 	 * @throws EmptyStackException
 	 *             if the stack does not contains any elements.
 	 */
-	T pop() throws EmptyStackException;
+	T pop();
 
 	/**
 	 * Pushes an element onto the top of the stack.
