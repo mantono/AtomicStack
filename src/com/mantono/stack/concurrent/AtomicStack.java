@@ -46,7 +46,7 @@ public class AtomicStack<T> implements Stack<T>
 			if(empty())
 				throw new EmptyStackException();
 			final T element = stackVector[head];
-			stackVector[head++] = null;
+			stackVector[head--] = null;
 			return element;
 		}
 		finally
