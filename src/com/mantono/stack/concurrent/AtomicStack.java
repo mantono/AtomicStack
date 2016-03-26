@@ -38,19 +38,16 @@ public class AtomicStack<T> implements Stack<T>
 	}
 
 	@Override
-	public T pop()
+	public T pop() throws InterruptedException
 	{
 		try
 		{
 			permissionToModifyStack.acquire();
 			if(empty())
 				throw new EmptyStackException();
-			return stackVector[head--];
-		}
-		catch (InterruptedException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			final T element = stackVector[head];
+			stackVector[head++] = null;
+			return element;
 		}
 		finally
 		{
@@ -60,7 +57,7 @@ public class AtomicStack<T> implements Stack<T>
 	}
 
 	@Override
-	public T push(T item)
+	public T push(T item) throws InterruptedException
 	{
 		try
 		{
@@ -69,16 +66,10 @@ public class AtomicStack<T> implements Stack<T>
 				expand();
 			return stackVector[++head] = item;
 		}
-		catch (InterruptedException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		finally
 		{
 			permissionToModifyStack.release();
 		}
-		return null;
 	}
 
 	private void expand()

@@ -35,8 +35,9 @@ public interface Stack<T> extends Serializable
 	 * @return the top most element on the stack.
 	 * @throws EmptyStackException
 	 *             if the stack does not contains any elements.
+	 * @throws InterruptedException if interrupted while waiting
 	 */
-	T pop();
+	T pop() throws InterruptedException;
 
 	/**
 	 * Pushes an element onto the top of the stack.
@@ -44,6 +45,7 @@ public interface Stack<T> extends Serializable
 	 * @param item
 	 *            the element that will be added to the stack.
 	 * @return the same element (<code>item</code>).
+	 * @throws InterruptedException if interrupted while waiting
 	 */
-	T push(T item);
+	T push(T item) throws InterruptedException;
 }
