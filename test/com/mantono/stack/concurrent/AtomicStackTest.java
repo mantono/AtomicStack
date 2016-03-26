@@ -18,7 +18,7 @@ public class AtomicStackTest
 	}
 
 	@Test
-	public void testEmptyAfterRemoval()
+	public void testEmptyAfterRemoval() throws InterruptedException
 	{
 		final Stack<Integer> stack = new AtomicStack<Integer>();
 		stack.push(1);
@@ -27,7 +27,7 @@ public class AtomicStackTest
 	}
 
 	@Test
-	public void testPeek()
+	public void testPeek() throws InterruptedException
 	{
 		final Stack<Integer> stack = new AtomicStack<Integer>();
 		stack.push(1);
@@ -42,13 +42,13 @@ public class AtomicStackTest
 	}
 
 	@Test(expected = EmptyStackException.class)
-	public void testExceptionAtPopOnEmptyStack()
+	public void testExceptionAtPopOnEmptyStack() throws InterruptedException
 	{
 		new AtomicStack<Float>().pop();
 	}
 
 	@Test
-	public void testPop()
+	public void testPop() throws InterruptedException
 	{
 		final Stack<Integer> stack = new AtomicStack<Integer>();
 		stack.push(1);
@@ -57,7 +57,7 @@ public class AtomicStackTest
 	}
 
 	@Test
-	public void testPush()
+	public void testPush() throws InterruptedException
 	{
 		final Stack<Integer> stack = new AtomicStack<Integer>();
 		assertEquals(new Integer(1), stack.push(1));
@@ -75,7 +75,14 @@ public class AtomicStackTest
 			public void run()
 			{
 				for(int i = 0; i < 5000; i++)
-					stack.push(0);
+					try
+					{
+						stack.push(0);
+					}
+					catch(InterruptedException e)
+					{
+						e.printStackTrace();
+					}
 			}
 		};
 
@@ -85,7 +92,14 @@ public class AtomicStackTest
 			public void run()
 			{
 				for(int i = 0; i < 5000; i++)
-					stack.push(1);
+					try
+					{
+						stack.push(1);
+					}
+					catch(InterruptedException e)
+					{
+						e.printStackTrace();
+					}
 			}
 		};
 
@@ -110,7 +124,7 @@ public class AtomicStackTest
 	}
 
 	@Test
-	public void testPushToTheLimit()
+	public void testPushToTheLimit() throws InterruptedException
 	{
 		final Stack<Integer> stack = new AtomicStack<Integer>();
 		for(int i = 0; i < 20; i++)
@@ -120,7 +134,7 @@ public class AtomicStackTest
 	}
 
 	@Test
-	public void testHashCodeForEqualStacks()
+	public void testHashCodeForEqualStacks() throws InterruptedException
 	{
 		final AtomicStack<Integer> stack1 = new AtomicStack<Integer>();
 		final AtomicStack<Integer> stack2 = new AtomicStack<Integer>();
@@ -138,7 +152,7 @@ public class AtomicStackTest
 	}
 
 	@Test
-	public void testHashCodeForDifferentStacks()
+	public void testHashCodeForDifferentStacks() throws InterruptedException
 	{
 		final AtomicStack<Integer> stack1 = new AtomicStack<Integer>();
 		final AtomicStack<Integer> stack2 = new AtomicStack<Integer>();
@@ -156,7 +170,7 @@ public class AtomicStackTest
 	}
 
 	@Test
-	public void testEqualsPositive()
+	public void testEqualsPositive() throws InterruptedException
 	{
 		final AtomicStack<Integer> stack1 = new AtomicStack<Integer>();
 		final AtomicStack<Integer> stack2 = new AtomicStack<Integer>();
@@ -174,7 +188,7 @@ public class AtomicStackTest
 	}
 
 	@Test
-	public void testEqualsNegative()
+	public void testEqualsNegative() throws InterruptedException
 	{
 		final AtomicStack<Integer> stack1 = new AtomicStack<Integer>();
 		final AtomicStack<Integer> stack2 = new AtomicStack<Integer>();
@@ -189,7 +203,7 @@ public class AtomicStackTest
 	}
 
 	@Test
-	public void testToString()
+	public void testToString() throws InterruptedException
 	{
 		final AtomicStack<Integer> stack = new AtomicStack<Integer>();
 
