@@ -53,7 +53,6 @@ public class AtomicStack<T> implements Stack<T>
 		{
 			permissionToModifyStack.release();
 		}
-		return null;
 	}
 
 	@Override
