@@ -16,6 +16,7 @@ import com.mantono.stack.Stack;
  */
 public class AtomicStack<T> implements Stack<T>
 {
+	private static final long serialVersionUID = -8663234127316351574L;
 	private final Semaphore permissionToModifyStack = new Semaphore(1);
 	private T[] stackVector = (T[]) new Object[16];
 	private int head = -1;
